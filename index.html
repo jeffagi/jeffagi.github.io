@@ -129,7 +129,7 @@
 
     #mainNav .navbar-toggler {
       border: 2px solid rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
+      border-radius: 20px;
       padding: 0.5rem 1rem;
       color: rgba(255, 255, 255, 0.7);
       font-family: 'Varela Round', sans-serif;
@@ -183,7 +183,7 @@
       background-color: var(--primary);
       color: #fff;
       padding: 0.5rem 1rem;
-      border-radius: 10px;
+      border-radius: 20px;
       font-family: 'Varela Round', sans-serif;
       font-size: 0.8rem;
       letter-spacing: 0.1rem;
@@ -247,7 +247,7 @@
       border: none;
       color: #fff;
       padding: 0.75rem 1.5rem;
-      border-radius: 10px;
+      border-radius: 20px;
       font-size: 0.85rem;
       letter-spacing: 0.1rem;
       text-decoration: none;
@@ -300,7 +300,7 @@
 
     .work-card {
       background-color: #242424;
-      border-radius: 10px;
+      border-radius: 20px;
       padding: 2rem 2rem 1rem 2rem;
       max-width: 900px;
       margin: 0 auto;
@@ -365,67 +365,176 @@
 
     /* Projects Section */
     .projects-section {
-      padding: 3rem 0 8rem 0;
+      padding: 3rem 0 3rem 0;
       background-color: #f0f0f0;
     }
 
-    .projects-section h2.featured-text {
+    .projects-section .projects-card {
+      background-color: #242424;
+      border-radius: 20px;
+      padding: 3.5rem 3.5rem 4rem 3.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .projects-section .projects-card h2 {
       font-size: 1.8rem;
-      color: #333;
+      color: #fff;
+      margin-bottom: 2.5rem;
+      padding-left: 0;
     }
 
-    .projects-section .project-text {
+    .projects-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .projects-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .projects-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .project-slide {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      background-color: #242424;
+    }
+
+    .project-slide img {
+      width: 100%;
+      height: 280px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .project-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 2rem;
+      opacity: 1;
+      transition: opacity 0.35s ease;
     }
 
-    .projects-section h4 {
-      font-size: 1.5rem;
+    /* Shine effect - on image only */
+    .project-slide::after {
+      display: none;
+    }
+
+    .project-slide img {
+      width: 100%;
+      height: 360px;
+      object-fit: contain;
+      display: block;
+      position: relative;
+    }
+
+    .project-slide .img-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-slide .img-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 12%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.04) 40%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.04) 60%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0;
+    }
+
+    .project-slide .img-wrapper.shine::after {
+      opacity: 1;
+      animation: shineSwipe 0.7s ease-out forwards;
+    }
+
+    @keyframes shineSwipe {
+      0% {
+        left: -100%;
+        opacity: 1;
+      }
+      100% {
+        left: 150%;
+        opacity: 0;
+      }
+    }
+
+    .project-slide-overlay h4 {
+      font-size: 0.95rem;
       color: #fff;
       font-weight: 700;
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
     }
 
-    .projects-section p {
+    .project-slide-overlay p {
       font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
     }
 
-    .projects-section .btn {
-      background-color: transparent;
+    .project-slide-overlay .project-links a {
       color: #a855f7;
       font-size: 0.95rem;
-      padding: 0.5rem 0;
-      border-radius: 0;
-      margin: 0.25rem 1.5rem 0.25rem 0;
-      text-transform: uppercase;
-      letter-spacing: 0.15rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12rem;
+      text-decoration: none;
+      margin: 0 0.8rem;
+      line-height: 1.4;
+      transition: color 0.2s ease;
     }
 
-    .projects-section .btn:hover {
-      background-color: transparent;
+    .project-slide-overlay .project-links a:hover {
       color: #c084fc;
     }
 
-    .projects-section .row {
-      border-radius: 0;
-      overflow: hidden;
+    .click-hint {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1rem;
     }
 
-    .projects-section .projects-container {
-      border-radius: 10px;
-      overflow: hidden;
+    @media (max-width: 768px) {
+      .project-slide img {
+        height: 200px;
+      }
     }
 
-    .projects-section .img-fluid {
-      width: 100%;
-      object-fit: contain;
-      background-color: #000;
-    }
 
-    .project-card {
-      background-color: #242424;
-      border: none;
-    }
 
     /* Contact Section */
     .contact-section {
@@ -440,7 +549,7 @@
     .contact-section .card {
       border: 0;
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: 20px;
     }
 
     .contact-section .card h4 {
@@ -501,6 +610,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#work">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#competitions">Competitions</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#projects">Projects</a>
@@ -700,57 +812,111 @@
       </div>
     </div>
   </section>
+
+  <!-- Competitions Section -->
+  <section class="work-section" style="padding-bottom: 3rem;">
+    <div class="container" id="competitions">
+      <div class="work-card">
+        <div class="work-title">
+          <div class="row no-gutters" style="margin-bottom: 1rem;">
+            <div class="workpadding">
+              <h2 class="featured-text">First Place Competition Wins</h2>
+            </div>
+          </div>
+
+          <!-- White content block -->
+          <div style="background-color: #fff; border-radius: 20px; padding: 3rem; margin: 0 1.5rem 1.5rem 1.5rem;">
+            <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+              <!-- Row 1 - Wharton -->
+              <div style="display: flex; justify-content: center; width: 100%;">
+                <img src="img/wharton.png" alt="Wharton" style="height: 80px; object-fit: contain;">
+              </div>
+              <!-- Row 2 - McKinsey -->
+              <div style="display: flex; justify-content: center; width: 100%;">
+                <img src="img/mckinsey.png" alt="McKinsey" style="height: 110px; object-fit: contain;">
+              </div>
+              <!-- Row 3 - PwC & Michigan -->
+              <div style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 3rem;">
+                <img src="img/pwc.png" alt="Strategy& PwC" style="height: 110px; object-fit: contain;">
+                <img src="img/michigan.png" alt="Michigan Ross" style="height: 72px; object-fit: contain;">
+              </div>
+              <!-- Row 4 - Waterloo & UWFA -->
+              <div style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 3rem;">
+                <img src="img/waterloo.svg" alt="Waterloo" style="height: 120px; object-fit: contain;">
+                <img src="img/uwfa.png" alt="UWFA" style="height: 200px; object-fit: contain;">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="projects-section">
     <div class="container" id="projects">
-      <div class="workpadding" style="padding-left: 0;">
-        <h2 class="featured-text">Projects</h2>
-      </div>
 
-      <div class="projects-container" style="margin-top: 2.5rem;">
+      <div class="projects-card">
+        <h2>Projects</h2>
 
-        <!-- Project 1 - Jet (text left, image right) -->
-        <div class="row justify-content-center no-gutters">
-          <div class="col-lg-6 bg-black">
-            <img class="img-fluid" src="img/jet.png" alt="Jet">
+        <div class="projects-stack">
+          <!-- Project 1 - Rain -->
+          <div class="project-slide">
+            <div class="img-wrapper">
+              <img src="img/rain.png" alt="Rain" style="padding: 1.5rem;">
+            </div>
+            <div class="project-slide-overlay">
+              <h4>Rain</h4>
+              <p>Earn 5x points on AI token spend.</p>
+              <div class="project-links">
+                <a href="https://github.com/jeffagi">Shop It</a>
+                <a href="https://github.com/jeffagi">Save It</a>
+              </div>
+              <div class="click-hint">
+                <span style="font-size: 150%;">✦</span> Click to reveal
+              </div>
+            </div>
           </div>
-          <div class="col-lg-6 order-lg-first">
-            <div class="project-card text-center h-100 project">
-              <div class="d-flex h-100">
-                <div class="project-text w-100 my-auto text-center text-lg-right">
-                  <h4>Jet</h4>
-                  <p class="mb-0">Claude, Cursor and terminal, all in one.</p>
-                  <div style="text-align: right;">
-                    <a href="https://github.com/jeffagi" class="btn" style="margin-right: 1.5rem;">Try It</a>
-                    <a href="https://github.com/jeffagi" class="btn" style="margin-right: 0;">Watch It</a>
-                  </div>
-                </div>
+
+          <!-- Project 2 - Jet -->
+          <div class="project-slide">
+            <div class="img-wrapper">
+              <img src="img/jet.png" alt="Jet">
+            </div>
+            <div class="project-slide-overlay">
+              <h4>Jet</h4>
+              <p>Claude, Cursor and terminal, all in one.</p>
+              <div class="project-links">
+                <a href="https://github.com/jeffagi">Hide It</a>
+                <a href="https://github.com/jeffagi">Flex It</a>
+              </div>
+              <div class="click-hint">
+                <span style="font-size: 150%;">✦</span> Click to reveal
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 - Century -->
+          <div class="project-slide">
+            <div class="img-wrapper">
+              <img src="img/century.png" alt="Century">
+            </div>
+            <div class="project-slide-overlay" style="backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); background: rgba(0, 0, 0, 0.65);">
+              <h4>Century</h4>
+              <p>Legally compliant wills in any language, anywhere.</p>
+              <div class="project-links">
+                <a href="https://github.com/jeffagi">Trust It</a>
+                <a href="https://github.com/jeffagi">Save It</a>
+              </div>
+              <div class="click-hint">
+                <span style="font-size: 150%;">✦</span> Click to reveal
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Project 2 - Century (image left, text right) -->
-        <div class="row justify-content-center no-gutters">
-          <div class="col-lg-6 bg-black">
-            <img class="img-fluid" src="img/century.png" alt="Century">
-          </div>
-          <div class="col-lg-6">
-            <div class="project-card text-center h-100 project">
-              <div class="d-flex h-100">
-                <div class="project-text w-100 my-auto text-center text-lg-left">
-                  <h4>Century</h4>
-                  <p class="mb-0">Legally compliant wills in any language, anywhere.</p>
-                  <div class="text-lg-left">
-                    <a href="https://github.com/jeffagi" class="btn">Source Code</a>
-                    <a href="https://github.com/jeffagi" class="btn">Try It</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
     </div>
   </section>
 
@@ -804,7 +970,7 @@
       }
 
       // Active section tracking
-      var sections = ['about', 'work', 'projects', 'contact'];
+      var sections = ['about', 'work', 'competitions', 'projects', 'contact'];
       var navLinks = document.querySelectorAll('#mainNav .nav-link');
       var scrollPos = window.scrollY + 150;
 
@@ -825,6 +991,30 @@
         navLinks.forEach(function(link) { link.classList.remove('active'); });
       }
     });
+
+    // Projects: click toggles between image and overlay
+    (function() {
+      var slides = document.querySelectorAll('.project-slide');
+
+      slides.forEach(function(slide) {
+        var overlay = slide.querySelector('.project-slide-overlay');
+        var imgWrapper = slide.querySelector('.img-wrapper');
+
+        slide.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') return;
+
+          if (overlay.style.opacity === '0') {
+            overlay.style.opacity = '1';
+            imgWrapper.classList.remove('shine');
+          } else {
+            overlay.style.opacity = '0';
+            imgWrapper.classList.remove('shine');
+            void imgWrapper.offsetWidth;
+            imgWrapper.classList.add('shine');
+          }
+        });
+      });
+    })();
   </script>
 
 </body>
