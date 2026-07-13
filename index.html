@@ -448,7 +448,6 @@
 
     .project-slide .img-wrapper {
       position: relative;
-      overflow: hidden;
     }
 
     .project-slide .img-wrapper::after {
@@ -542,6 +541,19 @@
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.1rem;
+    }
+
+    .return-hint {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1rem;
+      display: none;
+      z-index: 10;
+      pointer-events: none;
     }
 
     @media (max-width: 768px) {
@@ -841,7 +853,7 @@
           </div>
 
           <!-- White content block -->
-          <div style="background-color: #fff; border-radius: 20px; padding: 3rem; margin: 0 1.5rem 1.5rem 1.5rem;">
+          <div style="background-color: #fff; border-radius: 20px; padding: 3rem 3rem 1.5rem 3rem; margin: 0 1.5rem 1.5rem 1.5rem;">
             <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
               <!-- Row 1 - Wharton -->
               <div style="display: flex; justify-content: center; width: 100%;">
@@ -880,6 +892,7 @@
           <div class="project-slide">
             <div class="img-wrapper">
               <img src="img/rain.png" alt="Rain" style="padding: 1.5rem;">
+              <div class="return-hint"><span style="font-size: 150%;">✦</span> Click to return</div>
             </div>
             <div class="project-slide-overlay">
               <h4>Rain</h4>
@@ -888,9 +901,7 @@
                 <a href="https://github.com/jeffagi">Shop It</a>
                 <a href="https://github.com/jeffagi">Save It</a>
               </div>
-              <div class="click-hint">
-                <span style="font-size: 150%;">✦</span> Click to reveal
-              </div>
+              <div class="click-hint"><span style="font-size: 150%;">✦</span> Click to reveal</div>
             </div>
           </div>
 
@@ -898,6 +909,7 @@
           <div class="project-slide">
             <div class="img-wrapper">
               <img src="img/jet.png" alt="Jet">
+              <div class="return-hint"><span style="font-size: 150%;">✦</span> Click to return</div>
             </div>
             <div class="project-slide-overlay">
               <h4>Jet</h4>
@@ -906,9 +918,7 @@
                 <a href="https://github.com/jeffagi">Hide It</a>
                 <a href="https://github.com/jeffagi">Flex It</a>
               </div>
-              <div class="click-hint">
-                <span style="font-size: 150%;">✦</span> Click to reveal
-              </div>
+              <div class="click-hint"><span style="font-size: 150%;">✦</span> Click to reveal</div>
             </div>
           </div>
 
@@ -916,6 +926,7 @@
           <div class="project-slide">
             <div class="img-wrapper">
               <img src="img/century.png" alt="Century">
+              <div class="return-hint"><span style="font-size: 150%;">✦</span> Click to return</div>
             </div>
             <div class="project-slide-overlay" style="backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); background: rgba(0, 0, 0, 0.65);">
               <h4>Century</h4>
@@ -924,9 +935,7 @@
                 <a href="https://github.com/jeffagi">Trust It</a>
                 <a href="https://github.com/jeffagi">Save It</a>
               </div>
-              <div class="click-hint">
-                <span style="font-size: 150%;">✦</span> Click to reveal
-              </div>
+              <div class="click-hint"><span style="font-size: 150%;">✦</span> Click to reveal</div>
             </div>
           </div>
         </div>
@@ -1015,18 +1024,26 @@
       slides.forEach(function(slide) {
         var overlay = slide.querySelector('.project-slide-overlay');
         var imgWrapper = slide.querySelector('.img-wrapper');
+        var clickHint = slide.querySelector('.click-hint');
+        var returnHint = slide.querySelector('.return-hint');
 
         slide.addEventListener('click', function(e) {
           if (e.target.tagName === 'A') return;
 
           if (overlay.style.opacity === '0') {
+            // Return to overlay
             overlay.style.opacity = '1';
             imgWrapper.classList.remove('shine');
+            if (returnHint) returnHint.style.display = 'none';
+            if (clickHint) clickHint.style.display = '';
           } else {
+            // Reveal image
             overlay.style.opacity = '0';
             imgWrapper.classList.remove('shine');
             void imgWrapper.offsetWidth;
             imgWrapper.classList.add('shine');
+            if (clickHint) clickHint.style.display = 'none';
+            if (returnHint) returnHint.style.display = '';
           }
         });
       });
