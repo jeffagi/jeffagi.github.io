@@ -511,11 +511,26 @@
       text-decoration: none;
       margin: 0 0.8rem;
       line-height: 1.4;
+      white-space: nowrap;
       transition: color 0.2s ease;
+    }
+
+    .project-slide-overlay .project-links {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
     }
 
     .project-slide-overlay .project-links a:hover {
       color: #c084fc;
+    }
+
+    @media (max-width: 576px) {
+      .project-slide-overlay .project-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0.05rem;
+        margin: 0 0.5rem;
+      }
     }
 
     .click-hint {
@@ -829,21 +844,21 @@
             <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
               <!-- Row 1 - Wharton -->
               <div style="display: flex; justify-content: center; width: 100%;">
-                <img src="img/wharton.png" alt="Wharton" style="height: 80px; object-fit: contain;">
+                <img src="img/wharton.png" alt="Wharton" style="max-width: 100%; height: 80px; object-fit: contain;">
               </div>
               <!-- Row 2 - McKinsey -->
               <div style="display: flex; justify-content: center; width: 100%;">
-                <img src="img/mckinsey.png" alt="McKinsey" style="height: 110px; object-fit: contain;">
+                <img src="img/mckinsey.png" alt="McKinsey" style="max-width: 100%; height: 110px; object-fit: contain;">
               </div>
               <!-- Row 3 - PwC & Michigan -->
-              <div style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 3rem;">
-                <img src="img/pwc.png" alt="Strategy& PwC" style="height: 110px; object-fit: contain;">
-                <img src="img/michigan.png" alt="Michigan Ross" style="height: 72px; object-fit: contain;">
+              <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; width: 100%; gap: 2rem;">
+                <img src="img/pwc.png" alt="Strategy& PwC" style="max-width: 45%; height: 110px; object-fit: contain;">
+                <img src="img/michigan.png" alt="Michigan Ross" style="max-width: 45%; height: 72px; object-fit: contain;">
               </div>
               <!-- Row 4 - Waterloo & UWFA -->
-              <div style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 3rem;">
-                <img src="img/waterloo.svg" alt="Waterloo" style="height: 120px; object-fit: contain;">
-                <img src="img/uwfa.png" alt="UWFA" style="height: 200px; object-fit: contain;">
+              <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; width: 100%; gap: 2rem;">
+                <img src="img/waterloo.svg" alt="Waterloo" style="max-width: 45%; height: 120px; object-fit: contain;">
+                <img src="img/uwfa.png" alt="UWFA" style="max-width: 45%; height: 200px; object-fit: contain;">
               </div>
             </div>
           </div>
